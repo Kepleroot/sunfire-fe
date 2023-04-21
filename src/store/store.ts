@@ -1,27 +1,31 @@
-import createSagaMiddleware from '@redux-saga/core';
-import { compose, createStore, applyMiddleware, Middleware } from 'redux';
-import logger from 'redux-logger';
-import { rootReducer } from './root-reducer';
-import { rootSaga } from './root-saga';
-import { SongsState } from './song/songs.types';
+import {createStore, applyMiddleware, combineReducers, Middleware, compose} from 'redux'
+import { songsReducer } from './songs/reducers';
+import createSagaMiddleware from 'redux-saga';
+import all  from 'redux-saga'
+import { SongsState } from './songs/types';
+import { composeWithDevTools } from 'redux-devtools-extension'
 
-declare global {
-  interface Window {
-    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
-  }
-}
+const rootReducer = combineReducers({
+  songs: songsReducer
+});
 
-const composeEnchancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+//function* rootSaga() {
+//  yield all
+//} 
 
-const sagaMiddleware = createSagaMiddleware();
+// const sagaMiddleware = createSagaMiddleware();
 
-const middlewares: Middleware[] = [sagaMiddleware];
+// const middlewares: Middleware[] = [sagaMiddleware];
 
-export const store = createStore(rootReducer, composeEnchancers(applyMiddleware(...middlewares)));
+const composeEnhancer = composeWithDevTools(
+  applyMiddleware()
+)
 
-sagaMiddleware.run(rootSaga)
+export const store = createStore(rootReducer, composeEnhancer)
 
-export interface Action {
+//sagaMiddleware.run(rootSaga)
+
+export interface SimpleAction {
   type: string;
   payload: any;
 }

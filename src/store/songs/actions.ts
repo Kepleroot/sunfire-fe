@@ -1,4 +1,4 @@
-import { Song, SongsActionTypes } from './songs.types'
+import { Song, SongsActionTypes } from "./types"
 
 export const fetchSongsRequest = () => ({
   type: SongsActionTypes.FETCH_SONGS_REQUEST
@@ -13,4 +13,3 @@ export const fetchSongsFailure = (error: any) => ({
   type: SongsActionTypes.FETCH_SONGS_FAILURE,
   payload: { error }
 })
-

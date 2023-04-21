@@ -2,27 +2,23 @@ import { BrowserRouter } from 'react-router-dom'
 import AppRouter from './components/AppRouter'
 import Header from './components/Header'
 import { useSelector } from 'react-redux'
-import { SongsState } from './store/song/songs.types'
-import { State } from './store/store'
+
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { fetchSongsRequest } from './store/song/songs.actions'
+import axios from 'axios'
+import { State } from './store/store'
+import { Song } from './store/songs/types'
 
 function App() {
 
+  const dispatch = useDispatch()
   const songs = useSelector((state: State) => state.songs.songs)
-  const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchSongsRequest())
-  }, [])
-
-  console.log(songs);
-
+  console.log(songs)
   return (
     <BrowserRouter>
       <Header />
-      <button onClick={() => dispatch(fetchSongsRequest())}>BUTTON</button>
+      <button onClick={() => dispatch}>BUTTON</button>
       <AppRouter />
     </BrowserRouter>
   )
