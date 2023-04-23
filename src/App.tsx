@@ -8,9 +8,9 @@ import { useDispatch } from 'react-redux'
 import axios from 'axios'
 import { State } from './store/store'
 import { Song } from './store/songs/types'
+import { fetchSongsRequest } from './store/songs/actions'
 
 function App() {
-
   const dispatch = useDispatch()
   const songs = useSelector((state: State) => state.songs.songs)
 
@@ -18,7 +18,7 @@ function App() {
   return (
     <BrowserRouter>
       <Header />
-      <button onClick={() => dispatch}>BUTTON</button>
+      <button onClick={() => dispatch(fetchSongsRequest())}>BUTTON</button>
       <AppRouter />
     </BrowserRouter>
   )

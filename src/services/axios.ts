@@ -1,12 +1,12 @@
-import axios from 'axios';
+import axios from 'axios'
 
 export const $host = axios.create({
-  baseURL: 'http://localhost:5000'
+  baseURL: import.meta.env.VITE_API_URL,
 })
 
 export const $authHost = axios.create({
-  baseURL: 'http://localhost:5000',
+  baseURL: import.meta.env.VITE_API_URL,
   headers: {
-    Authorization: `Bearer ${localStorage.getItem('token')}`
-  }
+    Authorization: `Bearer ${localStorage.getItem('token')}`,
+  },
 })

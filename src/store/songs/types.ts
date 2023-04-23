@@ -5,19 +5,19 @@ export const SongsActionTypes = {
 }
 
 export interface Song {
-  id: number;
-  name: string;
-  text: string;
-  author: string;
-  img?: string;
-  audio?: string;
-  genres?: Array<any>;
-  albums?: Array<any>;
-  infos?: Array<any>;
+  id: number
+  name: string
+  text: string
+  author: string
+  img?: string
+  audio?: string
+  genres?: Array<any>
+  albums?: Array<any>
+  infos?: Array<any>
 }
 
 export interface SongsState {
-  songs: Song[];
-  isLoading: boolean;
-  error: string;
+  songs: Song[]
+  isLoading: boolean
+  error: string
 }
