@@ -1,4 +1,4 @@
-import { SimpleAction } from '../store'
+import { SimpleAction } from '../../types'
 import { SongsActionTypes, SongsState } from './types'
 
 const initialState: SongsState = {

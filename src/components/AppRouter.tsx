@@ -3,7 +3,7 @@ import { adminRoutes, publicRoutes, userRoutes } from '../routes'
 
 const AppRouter = () => {
   return (
-    <div>
+    <div className='flex flex-col'>
       <Routes>
         {publicRoutes.map(({ path, Component }) => (
           <Route key={path} path={path} element={<Component />} />

@@ -1,6 +1,4 @@
-import { put, call, take, takeEvery, all } from 'redux-saga/effects'
-import { fetchSongsRequest } from './actions'
-import axios from 'axios'
+import { put, call, takeEvery, all } from 'redux-saga/effects'
 import { fetchSongsSuccess } from './actions'
 import { fetchSongsFailure } from './actions'
 import { SongsActionTypes } from './types'

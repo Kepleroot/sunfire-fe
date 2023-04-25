@@ -27,6 +27,7 @@ export default {
         800: '#272A2F',
       },
       gray: {
+        300: '#757C82',
         800: '#2F3B49',
       },
       black: '#1B1B1B',

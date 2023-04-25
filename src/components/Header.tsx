@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 
 const Header = () => {
   const linkClasses: string =
-    'my-2 px-3 border-r-2 last:border-0 font-semibold text-white'
+    'my-2 px-5 border-r-2 last:border-0 font-semibold text-white'
 
   return (
     <div className="flex flex-col">
