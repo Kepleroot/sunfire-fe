@@ -16,8 +16,20 @@ export const songsReducer = (
       return { ...state, isLoading: true }
     case SongsActionTypes.FETCH_SONGS_SUCCESS:
       return { ...state, isLoading: false, songs: payload.songs }
+
+    case SongsActionTypes.CREATE_SONG_REQUEST:
+      return { ...state, isLoading: true }
+    case SongsActionTypes.CREATE_SONG_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        songs: [...state.songs, payload.createdSong],
+      }
+
     case SongsActionTypes.FETCH_SONGS_FAILURE:
+    case SongsActionTypes.CREATE_SONG_FAILURE:
       return { ...state, isLoading: false, error: payload.error }
+
     default:
       return state
   }

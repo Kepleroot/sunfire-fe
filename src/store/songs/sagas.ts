@@ -1,7 +1,7 @@
-import { put, call, takeEvery, all } from 'redux-saga/effects'
-import { fetchSongsSuccess } from './actions'
+import { put, call, all, takeLatest } from 'redux-saga/effects'
+import { createSongFailure, createSongRequest, createSongSuccess, fetchSongsSuccess } from './actions'
 import { fetchSongsFailure } from './actions'
-import { SongsActionTypes } from './types'
+import { ICreateSongRequest, SongsActionTypes } from './types'
 import { $host } from '../../services/axios'
 
 function* fetchSongs() {
@@ -13,10 +13,24 @@ function* fetchSongs() {
   }
 }
 
-function* watchFetchSongs() {
-  yield takeEvery(SongsActionTypes.FETCH_SONGS_REQUEST, fetchSongs)
+function* createSong({ payload }: ICreateSongRequest) {
+  try {
+    const { song } = payload;
+    const { data } = yield call($host.post, '/songs', song)
+    yield put(createSongSuccess(data))
+  } catch (error) {
+    yield put(createSongFailure(error))
+  }
+}
+
+function* watchFetchSongsRequest() {
+  yield takeLatest(SongsActionTypes.FETCH_SONGS_REQUEST, fetchSongs)
+}
+
+function* watchCreateSongRequest() {
+  yield takeLatest(SongsActionTypes.CREATE_SONG_REQUEST, createSong)
 }
 
 export default function* songsSaga() {
-  yield all([watchFetchSongs()])
+  yield all([watchFetchSongsRequest(), watchCreateSongRequest()])
 }
