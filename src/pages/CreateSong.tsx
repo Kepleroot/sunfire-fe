@@ -1,10 +1,11 @@
 import { ChangeEvent, useState } from 'react'
 import ReactAudioPlayer from 'react-audio-player'
-import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import Button from '../components/UI/Button'
-import { createSongRequest, fetchSongsRequest } from '../store/songs/actions'
-import { State } from '../types'
+import { createSongRequest } from '../store/songs/actions'
+import Input from '../components/UI/Input'
+import TextArea from '../components/UI/TextArea'
+import { redirect, useNavigate } from 'react-router-dom'
 
 const CreateSong = () => {
   const [title, setTitle] = useState<string>('')
@@ -12,17 +13,20 @@ const CreateSong = () => {
   const [text, setText] = useState<string>('')
   const [imgFile, setImgFile] = useState<File>()
   const [audioFile, setAudioFile] = useState<File>()
+  const [status, setStatus] = useState<string>()
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const sendData = () => {
     const formData = new FormData()
     formData.append('name', title)
     formData.append('author', author)
     formData.append('text', text)
-    if (imgFile) formData.append('img', imgFile)
+    if (imgFile) formData.append('image', imgFile)
     if (audioFile) formData.append('audio', audioFile)
-    dispatch(createSongRequest(formData))
+    const d = dispatch(createSongRequest(formData))
+    return navigate('/')
   }
 
   const inputClasses: string = 'border rounded-sm border-gray-300 min-h-[25px]'
@@ -30,37 +34,26 @@ const CreateSong = () => {
 
   return (
     <>
-      <form className="flex flex-col mx-12 items-center">
+      <div className="flex flex-col mx-12 items-center">
         <h1 className="pt-2 text-center font-bold text-3xl">Add new song</h1>
         <div className="flex flex-col max-w-[500px] w-1/2">
-          <label className={labelClasses} htmlFor="song__tilte">
-            TITLE
-          </label>
-          <input
-            className={inputClasses}
-            id="song__title"
+          <span className={labelClasses}>Title</span>
+          <Input
+            type="text"
             placeholder="Title"
-            required
             onChange={(e) => setTitle(e.target.value)}
           />
-          <label className={labelClasses} htmlFor="song__author">
-            Author
-          </label>
-          <input
-            className={inputClasses}
-            id="song__author"
+          <span className={labelClasses}>Author</span>
+          <Input
+            type="text"
             placeholder="Author"
-            required
             onChange={(e) => setAuthor(e.target.value)}
           />
-          <label className={labelClasses} htmlFor="song__text">
-            Lyrics
-          </label>
-          <textarea
-            className={inputClasses}
-            id="song__text"
+          <span className={labelClasses}>Lyrics</span>
+          <TextArea
+            placeholder="lyrics"
             onChange={(e) => setText(e.target.value)}
-          ></textarea>
+          />
         </div>
         {/* files */}
         <div className="mt-3 flex flex-row">
@@ -106,7 +99,7 @@ const CreateSong = () => {
           </div>
         </div>
         <Button text="Send" className="mt-4" onClick={() => sendData()} />
-      </form>
+      </div>
     </>
   )
 }
