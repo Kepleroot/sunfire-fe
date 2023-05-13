@@ -38,8 +38,19 @@ const CreateSong = () => {
     formData.append('text', text)
     if (imgFile) formData.append('image', imgFile)
     if (audioFile) formData.append('audio', audioFile)
-    const d = dispatch(createSongRequest(formData))
-    return navigate('/')
+    if (info.length > 0) {
+      const newInfos = info;
+      newInfos.forEach((i, index) => {
+        for(let key in i){
+          formData.append(`infos[${index}][${key}]`, i[key])
+        }
+      })
+    }
+    dispatch(createSongRequest(formData))
+
+    console.log(formData)
+
+    // return navigate('/')
   }
 
   const inputClasses: string = 'border rounded-sm border-gray-300 min-h-[25px]'
