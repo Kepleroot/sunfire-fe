@@ -9,7 +9,7 @@ export const SongsActionTypes = {
 }
 
 export interface Song {
-  id: number
+  id?: number
   name: string
   text: string
   author: string
@@ -17,7 +17,13 @@ export interface Song {
   audio?: string
   genres?: Array<any>
   albums?: Array<any>
-  infos?: Array<any>
+  infos?: Info[]
+}
+
+export interface Info {
+  id: number
+  title: string
+  description: string
 }
 
 export interface SongsState {
@@ -27,7 +33,7 @@ export interface SongsState {
 }
 
 export interface ICreateSongRequest {
-  type: string;
+  type: string
   payload: {
     song: Partial<FormData>
   }

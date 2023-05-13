@@ -5,7 +5,8 @@ import Button from '../components/UI/Button'
 import { createSongRequest } from '../store/songs/actions'
 import Input from '../components/UI/Input'
 import TextArea from '../components/UI/TextArea'
-import { redirect, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { CreateInfo } from '../types'
 
 const CreateSong = () => {
   const [title, setTitle] = useState<string>('')
@@ -13,10 +14,22 @@ const CreateSong = () => {
   const [text, setText] = useState<string>('')
   const [imgFile, setImgFile] = useState<File>()
   const [audioFile, setAudioFile] = useState<File>()
-  const [status, setStatus] = useState<string>()
+  const [info, setInfo] = useState<CreateInfo[]>([])
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
+
+  const addInfo = () => {
+    setInfo([...info, { title: '', description: '', number: Date.now() }])
+  }
+
+  const editInfo = (key: string, value: string, number: number) => {
+    setInfo(info.map((i) => (i.number == number ? { ...i, [key]: value } : i)))
+  }
+
+  const removeInfo = (number: number) => {
+    setInfo(info.filter((i) => i.number != number))
+  }
 
   const sendData = () => {
     const formData = new FormData()
@@ -39,19 +52,20 @@ const CreateSong = () => {
         <div className="flex flex-col max-w-[500px] w-1/2">
           <span className={labelClasses}>Title</span>
           <Input
-            type="text"
             placeholder="Title"
+            value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
           <span className={labelClasses}>Author</span>
           <Input
-            type="text"
             placeholder="Author"
+            value={author}
             onChange={(e) => setAuthor(e.target.value)}
           />
           <span className={labelClasses}>Lyrics</span>
           <TextArea
-            placeholder="lyrics"
+            placeholder="Lyrics"
+            value={text}
             onChange={(e) => setText(e.target.value)}
           />
         </div>
@@ -97,6 +111,35 @@ const CreateSong = () => {
               </span>
             )}
           </div>
+        </div>
+        <div className="flex flex-col justify-center">
+          <Button
+            className="w-max mt-4 self-center"
+            text="Add new info"
+            onClick={() => addInfo()}
+          ></Button>
+          {info.map((i) => (
+            <div className="flex flex-row justify-around mt-2" key={i.number}>
+              <Input
+                placeholder="Title"
+                value={i.title}
+                onChange={(e) => editInfo('title', e.target.value, i.number)}
+              />
+              <Input
+                className="ml-3"
+                placeholder="Description"
+                value={i.description}
+                onChange={(e) =>
+                  editInfo('description', e.target.value, i.number)
+                }
+              />
+              <Button
+                className="ml-3 bg-red-400 hover:bg-red-500"
+                text="Delete"
+                onClick={() => removeInfo(i.number)}
+              />
+            </div>
+          ))}
         </div>
         <Button text="Send" className="mt-4" onClick={() => sendData()} />
       </div>

@@ -10,3 +10,9 @@ export interface SimpleAction {
   type: string
   payload: any
 }
+
+export interface CreateInfo {
+  number: number
+  title: string
+  description: string
+}
