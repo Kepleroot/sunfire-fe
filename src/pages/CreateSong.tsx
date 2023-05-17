@@ -47,10 +47,7 @@ const CreateSong = () => {
       })
     }
     dispatch(createSongRequest(formData))
-
-    console.log(formData)
-
-    // return navigate('/')
+    return navigate('/')
   }
 
   const inputClasses: string = 'border rounded-sm border-gray-300 min-h-[25px]'
