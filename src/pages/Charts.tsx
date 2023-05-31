@@ -13,10 +13,15 @@ const Charts = () => {
   useEffect(() => {
     dispatch(fetchSongsRequest())
   }, [dispatch])
-  
+
   return (
     <div>
-      <SongsList songs={songs} />
+      <span>
+        <p className="text-center font-bold text-2xl">Charts</p>
+      </span>
+      <div className="flex flex-row justify-center">
+        <SongsList className="w-9/12" songs={songs} />
+      </div>
     </div>
   )
 }

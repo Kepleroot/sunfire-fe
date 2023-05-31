@@ -50,7 +50,6 @@ const CreateSong = () => {
     return navigate('/')
   }
 
-  const inputClasses: string = 'border rounded-sm border-gray-300 min-h-[25px]'
   const labelClasses: string = 'mt-2 font-medium text-base'
 
   return (

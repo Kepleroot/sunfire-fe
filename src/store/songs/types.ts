@@ -13,6 +13,7 @@ export interface Song {
   name: string
   text: string
   author: string
+  views: number
   img?: string
   audio?: string
   genres?: Array<any>
