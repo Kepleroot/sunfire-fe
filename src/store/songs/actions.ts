@@ -15,20 +15,37 @@ export const fetchSongsFailure = (error: any) => ({
   payload: { error },
 })
 
+//fetch one
+
+export const fetchOneSongRequest = (id: number) => ({
+  type: SongsActionTypes.FETCH_ONE_SONG_REQUEST,
+  payload: { id },
+})
+
+export const fetchOneSongSuccess = (song: Song) => ({
+  type: SongsActionTypes.FETCH_ONE_SONG_SUCCESS,
+  payload: { song },
+})
+
+export const fetchOneSongFailure = (error: any) => ({
+  type: SongsActionTypes.FETCH_ONE_SONG_FAILURE,
+  payload: { error },
+})
+
 //create
-export const createSongRequest = (song: Partial<FormData>): ICreateSongRequest => ({
+export const createSongRequest = (
+  song: Partial<FormData>,
+): ICreateSongRequest => ({
   type: SongsActionTypes.CREATE_SONG_REQUEST,
-  payload: { song }
+  payload: { song },
 })
 
 export const createSongSuccess = (createdSong: Partial<Song>) => ({
   type: SongsActionTypes.CREATE_SONG_SUCCESS,
-  payload: { createdSong }
+  payload: { createdSong },
 })
 
 export const createSongFailure = (error: any) => ({
   type: SongsActionTypes.CREATE_SONG_FAILURE,
-  payload: { error }
+  payload: { error },
 })
-
-

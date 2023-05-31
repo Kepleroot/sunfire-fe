@@ -1,7 +1,17 @@
 import { put, call, all, takeLatest } from 'redux-saga/effects'
-import { createSongFailure, createSongRequest, createSongSuccess, fetchSongsSuccess } from './actions'
+import {
+  createSongFailure,
+  createSongSuccess,
+  fetchOneSongFailure,
+  fetchOneSongSuccess,
+  fetchSongsSuccess,
+} from './actions'
 import { fetchSongsFailure } from './actions'
-import { ICreateSongRequest, SongsActionTypes } from './types'
+import {
+  ICreateSongRequest,
+  IGetOneSongRequest,
+  SongsActionTypes,
+} from './types'
 import { $host } from '../../services/axios'
 
 function* fetchSongs() {
@@ -13,9 +23,20 @@ function* fetchSongs() {
   }
 }
 
+function* fecthOneSong({ payload }: IGetOneSongRequest) {
+  const { id } = payload
+
+  try {
+    const { data } = yield call($host.get, `/songs/${id}`)
+    yield put(fetchOneSongSuccess(data))
+  } catch (error) {
+    yield put(fetchOneSongFailure(error))
+  }
+}
+
 function* createSong({ payload }: ICreateSongRequest) {
   try {
-    const { song } = payload;
+    const { song } = payload
     const { data } = yield call($host.post, '/songs', song)
     yield put(createSongSuccess(data))
   } catch (error) {
@@ -27,10 +48,18 @@ function* watchFetchSongsRequest() {
   yield takeLatest(SongsActionTypes.FETCH_SONGS_REQUEST, fetchSongs)
 }
 
+function* watchFetchOneSongsRequest() {
+  yield takeLatest(SongsActionTypes.FETCH_ONE_SONG_REQUEST, fecthOneSong)
+}
+
 function* watchCreateSongRequest() {
   yield takeLatest(SongsActionTypes.CREATE_SONG_REQUEST, createSong)
 }
 
 export default function* songsSaga() {
-  yield all([watchFetchSongsRequest(), watchCreateSongRequest()])
+  yield all([
+    watchFetchSongsRequest(),
+    watchCreateSongRequest(),
+    watchFetchOneSongsRequest(),
+  ])
 }

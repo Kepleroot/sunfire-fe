@@ -16,3 +16,8 @@ export interface CreateInfo {
   title: string
   description: string
 }
+
+export interface Info {
+  title: string
+  description: string
+}

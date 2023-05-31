@@ -3,6 +3,12 @@ import { SongsActionTypes, SongsState } from './types'
 
 const initialState: SongsState = {
   songs: [],
+  selectedSong: {
+    name: '',
+    author: '',
+    text: '',
+    views: 0,
+  },
   isLoading: false,
   error: '',
 }
@@ -16,6 +22,11 @@ export const songsReducer = (
       return { ...state, isLoading: true }
     case SongsActionTypes.FETCH_SONGS_SUCCESS:
       return { ...state, isLoading: false, songs: payload.songs }
+
+    case SongsActionTypes.FETCH_ONE_SONG_REQUEST:
+      return { ...state, isLoading: true }
+    case SongsActionTypes.FETCH_ONE_SONG_SUCCESS:
+      return { ...state, isLoading: false, selectedSong: payload.song }
 
     case SongsActionTypes.CREATE_SONG_REQUEST:
       return { ...state, isLoading: true }
