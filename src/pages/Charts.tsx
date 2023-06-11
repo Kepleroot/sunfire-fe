@@ -17,7 +17,7 @@ const Charts = () => {
   return (
     <div>
       <span>
-        <p className="text-center font-bold text-2xl">Charts</p>
+        <p className="text-center font-bold text-2xl">Songs</p>
       </span>
       <div className="flex flex-row justify-center">
         <SongsList className="w-9/12" songs={songs} />

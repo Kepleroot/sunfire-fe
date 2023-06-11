@@ -6,9 +6,9 @@ export interface InfoItemProps {
 
 const InfoItem = ({ info }: InfoItemProps) => {
   return (
-    <div className='flex flex-col mr-6'>
-      <span className='text-xl font-bold'>{info.title}</span>
-      <span className=''>{info.description}</span>
+    <div className='flex flex-col mr-6  '>
+      <span className='text-xl font-bold mt-1 truncate'>{info.title}</span>
+      <span className='text-lg mt-1 truncate'>{info.description}</span>
     </div>
   )
 }

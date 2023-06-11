@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import LogoIcon from './UI/icons/LogoIcon'
 
 const Header = () => {
   const linkClasses: string =
@@ -6,7 +7,11 @@ const Header = () => {
 
   return (
     <div className="flex flex-col">
-      <div className="bg-yellow-100">Logo</div>
+      <div className="flex flex-row justify-center bg-yellow-100">
+        <div className='self-center'>
+          <LogoIcon />
+        </div>
+      </div>
       <div className="flex flex-row justify-center bg-black">
         <Link to="" className={linkClasses}>
           CHARTS

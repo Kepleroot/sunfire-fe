@@ -27,7 +27,7 @@ function* fecthOneSong({ payload }: IGetOneSongRequest) {
   const { id } = payload
 
   try {
-    const { data } = yield call($host.get, `/songs/${id}`)
+    const { data } = yield call($host.get, `/songs/songs/${id}`)
     yield put(fetchOneSongSuccess(data))
   } catch (error) {
     yield put(fetchOneSongFailure(error))

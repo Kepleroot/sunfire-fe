@@ -44,7 +44,7 @@ const SongPage = () => {
           <span className="flex justify-center font-bold text-3xl">
             <p>ABOUT</p>
           </span>
-          <div className='flex justify-center'>
+          <div className='flex justify-center mt-4'>
             {song.infos.map((i, index) => (
               <InfoItem key={index} info={i} />
             ))}
