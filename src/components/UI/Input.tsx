@@ -1,14 +1,15 @@
 import cx from 'classnames'
-import { ChangeEvent } from 'react'
+import { ChangeEvent, MouseEvent } from 'react'
 
 export interface InputProps {
   value: string
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void
+  onClick?: (e: MouseEvent<HTMLInputElement>) => void
   placeholder?: string
   className?: string
 }
 
-const Input = ({ value, onChange, placeholder, className }: InputProps) => {
+const Input = ({ value, onChange, onClick, placeholder, className }: InputProps) => {
   return (
     <input
       className={cx(
@@ -21,6 +22,7 @@ const Input = ({ value, onChange, placeholder, className }: InputProps) => {
       )}
       value={value}
       onChange={onChange}
+      onClick={onClick}
       placeholder={placeholder}
     />
   )

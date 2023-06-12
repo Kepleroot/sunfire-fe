@@ -12,3 +12,8 @@ export const selectSong = createSelector(
   selectSongsState,
   (songs) => songs.selectedSong
 )
+
+export const searchedSongs = createSelector(
+  selectSongsState,
+  (songs) => songs.searchedSongs
+)

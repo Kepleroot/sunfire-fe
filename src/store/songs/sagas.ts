@@ -5,11 +5,14 @@ import {
   fetchOneSongFailure,
   fetchOneSongSuccess,
   fetchSongsSuccess,
+  fetchSearchedSongsSuccess,
+  fetchSearchedSongsFailure,
 } from './actions'
 import { fetchSongsFailure } from './actions'
 import {
   ICreateSongRequest,
   IGetOneSongRequest,
+  IGetSearchedSongsRequest,
   SongsActionTypes,
 } from './types'
 import { $host } from '../../services/axios'
@@ -34,6 +37,17 @@ function* fecthOneSong({ payload }: IGetOneSongRequest) {
   }
 }
 
+function* fecthSearchedSongs({ payload }: IGetSearchedSongsRequest) {
+  const { search } = payload
+
+  try {
+    const { data } = yield call($host.get, `/songs/search?search=${search}`)
+    yield put(fetchSearchedSongsSuccess(data))
+  } catch (error) {
+    yield put(fetchSearchedSongsFailure(error))
+  }
+}
+
 function* createSong({ payload }: ICreateSongRequest) {
   try {
     const { song } = payload
@@ -52,6 +66,10 @@ function* watchFetchOneSongsRequest() {
   yield takeLatest(SongsActionTypes.FETCH_ONE_SONG_REQUEST, fecthOneSong)
 }
 
+function* watchFetchSearchedSongsRequest() {
+  yield takeLatest(SongsActionTypes.FETCH_SEARCHED_SONGS_REQUEST, fecthSearchedSongs)
+}
+
 function* watchCreateSongRequest() {
   yield takeLatest(SongsActionTypes.CREATE_SONG_REQUEST, createSong)
 }
@@ -60,6 +78,7 @@ export default function* songsSaga() {
   yield all([
     watchFetchSongsRequest(),
     watchCreateSongRequest(),
+    watchFetchSearchedSongsRequest(),
     watchFetchOneSongsRequest(),
   ])
 }

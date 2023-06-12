@@ -3,7 +3,7 @@ import SongItem from './SongItem'
 
 export interface SongsListProps {
   songs: Song[]
-  className: string
+  className?: string
 }
 
 const SongsList = ({ songs, className }: SongsListProps) => {

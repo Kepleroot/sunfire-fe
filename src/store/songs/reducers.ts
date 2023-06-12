@@ -9,6 +9,7 @@ const initialState: SongsState = {
     text: '',
     views: 0,
   },
+  searchedSongs: [],
   isLoading: false,
   error: '',
 }
@@ -28,6 +29,11 @@ export const songsReducer = (
     case SongsActionTypes.FETCH_ONE_SONG_SUCCESS:
       return { ...state, isLoading: false, selectedSong: payload.song }
 
+    case SongsActionTypes.FETCH_SEARCHED_SONGS_REQUEST:
+      return { ...state, isLoading: true }
+    case SongsActionTypes.FETCH_SEARCHED_SONGS_SUCCESS:
+      return { ...state, isLoading: false, searchedSongs: payload.songs}
+
     case SongsActionTypes.CREATE_SONG_REQUEST:
       return { ...state, isLoading: true }
     case SongsActionTypes.CREATE_SONG_SUCCESS:
@@ -38,6 +44,8 @@ export const songsReducer = (
       }
 
     case SongsActionTypes.FETCH_SONGS_FAILURE:
+    case SongsActionTypes.FETCH_ONE_SONG_FAILURE:
+    case SongsActionTypes.FETCH_SEARCHED_SONGS_FAILURE:
     case SongsActionTypes.CREATE_SONG_FAILURE:
       return { ...state, isLoading: false, error: payload.error }
 

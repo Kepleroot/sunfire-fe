@@ -32,6 +32,23 @@ export const fetchOneSongFailure = (error: any) => ({
   payload: { error },
 })
 
+//fetch searched
+
+export const fetchSearchedSongsRequest = (search: string) => ({
+  type: SongsActionTypes.FETCH_SEARCHED_SONGS_REQUEST,
+  payload: { search }
+})
+
+export const fetchSearchedSongsSuccess = (songs: Song[]) => ({
+  type: SongsActionTypes.FETCH_SEARCHED_SONGS_SUCCESS,
+  payload: { songs }
+})
+
+export const fetchSearchedSongsFailure = (error: any) => ({
+  type: SongsActionTypes.FETCH_SEARCHED_SONGS_FAILURE,
+  payload: { error }
+})
+
 //create
 export const createSongRequest = (
   song: Partial<FormData>,

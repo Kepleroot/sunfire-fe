@@ -7,6 +7,10 @@ export const SongsActionTypes = {
   FETCH_ONE_SONG_SUCCESS: 'FETCH_ONE_SONG_SUCCESS',
   FETCH_ONE_SONG_FAILURE: 'FETCH_ONE_SONG_FAILURE',
 
+  FETCH_SEARCHED_SONGS_REQUEST: 'FETCH_SEARCHED_SONGS_REQUEST',
+  FETCH_SEARCHED_SONGS_SUCCESS: 'FETCH_SEARCHED_SONGS_SUCCESS',
+  FETCH_SEARCHED_SONGS_FAILURE: 'FETCH_SEARCHED_SONGS_FAILURE',
+
   CREATE_SONG_REQUEST: 'CREATE_SONG_REQUEST',
   CREATE_SONG_SUCCESS: 'CREATE_SONG_SUCCESS',
   CREATE_SONG_FAILURE: 'CREATE_SONG_FAILURE',
@@ -34,6 +38,7 @@ export interface Info {
 export interface SongsState {
   songs: Song[]
   selectedSong: Song
+  searchedSongs: Song[]
   isLoading: boolean
   error: string
 }
@@ -49,5 +54,12 @@ export interface IGetOneSongRequest {
   type: string
   payload: {
     id: number
+  }
+}
+
+export interface IGetSearchedSongsRequest {
+  type: string
+  payload: {
+    search: string
   }
 }
