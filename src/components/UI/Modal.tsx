@@ -21,6 +21,7 @@ const Modal = ({ className, children, visible, onClose }: ModalProps) => {
         'fixed',
         'flex',
         'justify-center',
+        'items-start',
         'p-10',
         'inset-0',
         'bg-black',
@@ -32,13 +33,16 @@ const Modal = ({ className, children, visible, onClose }: ModalProps) => {
       <div
         className={cx(
           className,
+          'relative',
           'flex',
           'flex-col',
-          'justify-center',
-          'h-min',
+          'items-start',
           'w-6/12',
+          'h-full',
           'rounded',
-          'bg-white'
+          'bg-white',
+          'overflow-x-hidden',
+          'overflow-y-scroll'
         )}
         onClick={(e) => e.stopPropagation()}
       >

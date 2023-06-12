@@ -40,14 +40,15 @@ const Charts = () => {
       <div className="w-9/12 self-center">
         <SongsList songs={songs} />
       </div>
-      <Modal className='' onClose={handleOnCloseModal} visible={showSearchModal}>
-        <h1 className='mt-1 self-center font-bold text-3xl'>Search</h1>
+      <Modal onClose={handleOnCloseModal} visible={showSearchModal}>
+        <h1 className='relative mt-1 self-center font-bold text-3xl'>Search</h1>
         <Input
-          className="w-4/12 my-4 self-center"
+          className="relative w-4/12 my-4 self-center"
           placeholder="Search..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
+        <SongsList className="w-full" songs={searchSongs} />
       </Modal>
     </div>
   )
