@@ -15,7 +15,6 @@ const Charts = () => {
 
   const songs = useSelector(selectSongs)
   const searchSongs = useSelector(searchedSongs)
-  console.log(searchSongs)
 
   const handleOnCloseModal = () => setShowSearchModal(false)
 
