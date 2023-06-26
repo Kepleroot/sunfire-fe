@@ -2,14 +2,32 @@ import React, { useState } from 'react'
 import ROUTES from '../constants'
 import Input from '../components/UI/Input'
 import Button from '../components/UI/Button'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { loginRequest, registrationRequest } from '../store/user/actions'
+import { User } from '../store/user/types'
+import { useSelector } from 'react-redux'
+import { selectIsAuthenticated } from '../store/user/selectors'
 
 const Auth = () => {
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const isLogin: boolean = location.pathname === ROUTES.LOGIN
 
-  const enter = () => {}
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const isAuthAuthenticated = useSelector(selectIsAuthenticated)
+  
+  if (isAuthAuthenticated)
+    return navigate('/')
+
+  const enter = () => {
+    const user: User = {
+      email: email,
+      password: password
+    }
+    isLogin ? dispatch(loginRequest(user)) : dispatch(registrationRequest(user))
+  }  
 
   return (
     <div className="flex justify-center align-middle">

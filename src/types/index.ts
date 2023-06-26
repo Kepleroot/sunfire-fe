@@ -1,8 +1,10 @@
 import { SongsState } from "../store/songs/types";
+import { UserState } from "../store/user/types";
 
 //store
 export interface State {
   songs: SongsState
+  user: UserState
 }
 
 //action
